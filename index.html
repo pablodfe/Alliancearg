@@ -616,25 +616,31 @@
         // Cargar el contenido del archivo TXT
         fetch('promocion.txt')
             .then(response => {
+                // Si el archivo no existe o responde con error (ej. 404), interrumpe silenciosamente
                 if (!response.ok) {
-                    throw new Error('No se pudo cargar el archivo');
+                    throw new Error('Archivo no disponible o no encontrado');
                 }
                 return response.text();
             })
             .then(data => {
-                // Si el archivo tiene texto válido, lo inserta y muestra el modal
-                if (data.trim() !== "") {
-                    document.getElementById('texto-promocion').innerText = data;
+                // .trim() elimina espacios en blanco, saltos de línea y tabulaciones al inicio y final
+                const mensajeLimpio = data ? data.trim() : "";
+
+                // Validación clave: Solo se ejecuta si el texto NO está vacío
+                if (mensajeLimpio.length > 0) {
+                    document.getElementById('texto-promocion').innerText = mensajeLimpio;
                     
-                    // Pequeña pausa de 1 segundo antes de mostrarlo para que sea fluido
+                    // Pausa de 1 segundo antes de desplegar el cartel flotante
                     setTimeout(() => {
                         document.getElementById('modal-promo').classList.add('mostrar');
                     }, 1000);
+                } else {
+                    console.log('El archivo promocion.txt está vacío. El aviso no se ejecutará.');
                 }
             })
             .catch(error => {
-                console.log('Error al cargar la promoción:', error);
-                // Si falla o el TXT está vacío, el modal permanece oculto.
+                // Si el .txt no existe o hay error de red, el modal permanece totalmente invisible
+                console.log('Aviso no mostrado:', error.message);
             });
     });
 
@@ -642,7 +648,7 @@
         document.getElementById('modal-promo').classList.remove('mostrar');
     }
 
-    // Opcional: Cerrar al hacer clic fuera de la caja blanca
+    // Cerrar al hacer clic fuera de la caja blanca
     window.onclick = function(event) {
         const modal = document.getElementById('modal-promo');
         if (event.target === modal) {
