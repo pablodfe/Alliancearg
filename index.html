@@ -9,20 +9,20 @@
     <link rel="stylesheet" href="css/all.min.css">
     
     <style>
-/* ESTILOS PARA EL MEGA MENÚ DE SEGUROS (REFORZADO) */
+        /* ESTILOS PARA EL MEGA MENÚ DE SEGUROS (REFORZADO) */
         .mega-menu {
             display: none;
             position: absolute;
             top: 100%;
-            left: 50%; /* Centrado relativo al botón */
-            transform: translateX(-50%); /* Centrado perfecto */
-            width: 800px; /* Un poco más ancho para dar espacio */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
             background-color: var(--blanco);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Sombra un poco más fuerte */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             border-top: 3px solid var(--celeste);
             border-radius: 0 0 5px 5px;
             padding: 20px 30px;
-            z-index: 9999; /* Z-index alto para que nada lo tape */
+            z-index: 9999;
         }
 
         /* FORZAR LA VISUALIZACIÓN EN HORIZONTAL */
@@ -35,17 +35,12 @@
 
         /* COLUMNAS FLEXIBLES */
         .mega-columna {
-            flex: 1; /* Todas las columnas toman el mismo ancho automáticamente */
-            padding: 0 15px; /* Espaciado entre columnas */
+            flex: 1;
+            padding: 0 15px;
         }
 
-        .mega-columna:first-child {
-            padding-left: 0;
-        }
-
-        .mega-columna:last-child {
-            padding-right: 0;
-        }
+        .mega-columna:first-child { padding-left: 0; }
+        .mega-columna:last-child { padding-right: 0; }
 
         .mega-columna h4 {
             color: var(--azul-oscuro);
@@ -63,9 +58,7 @@
             display: block !important;
         }
 
-        .mega-columna ul li {
-            margin-bottom: 5px;
-        }
+        .mega-columna ul li { margin-bottom: 5px; }
 
         .mega-columna ul li a {
             display: block;
@@ -82,6 +75,7 @@
             background-color: transparent;
             transition: all 0.2s ease;
         }
+
         :root {
             --azul-oscuro: #0f3a63;
             --celeste: #3498db;
@@ -100,21 +94,21 @@
 
         header { background-color: var(--blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .nav-container { 
-			max-width: 1200px;
-			margin: 0 auto;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 15px 20px;
-		}
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
         .logo { 
-			font-size: 24px;
-			font-weight: bold;
-			color: var(--azul-oscuro);
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--azul-oscuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .logo i { color: var(--celeste); }
         
         .nav-menu { list-style: none; display: flex; gap: 25px; align-items: center; }
@@ -127,16 +121,27 @@
 
         .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: var(--blanco); min-width: 200px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 3px solid var(--celeste); list-style: none; border-radius: 0 0 5px 5px; z-index: 100; }
         .dropdown-izq { left: auto !important; right: 0;}
-		.nav-item:hover .dropdown { display: block; }
+        .nav-item:hover .dropdown { display: block; }
         .dropdown li a { display: block; padding: 12px 20px; color: var(--texto-oscuro); font-weight: normal; border-bottom: 1px solid #eee; }
         .dropdown li a:hover { background-color: var(--fondo-claro); color: var(--celeste); padding-left: 25px; transition: all 0.3s; }
 
-        /* Llama a la imagen alojada en TU servidor */
-        .hero {
-            background-image: linear-gradient(rgba(15, 58, 99, 0.7), rgba(52, 152, 219, 0.6)), url('img/fondo-inicio.jpg');
+        /* --- ESTILOS DEL SLIDER / CARRUSEL --- */
+        .slider-container {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
             background-size: cover;
             background-position: center;
-            height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,94 +149,78 @@
             color: var(--blanco);
             padding: 20px;
         }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        /* Imágenes de fondo para cada diapositiva */
+        .slide1 {
+            background-image: linear-gradient(rgba(15, 58, 99, 0.7), rgba(52, 152, 219, 0.6)), url('img/fondo-inicio.jpg');
+        }
+        .slide2 {
+            background-image: linear-gradient(rgba(15, 58, 99, 0.7), rgba(52, 152, 219, 0.6)), url('img/fondo-contacto.jpg');
+        }
+        .slide3 {
+            background-image: linear-gradient(rgba(15, 58, 99, 0.7), rgba(52, 152, 219, 0.6)), url('img/fondo-automotor.jpg');
+        }
+
         .hero-content h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .hero-content p { font-size: 20px; margin-bottom: 30px; }
 
-        footer { background-color: var(--azul-oscuro); color: var(--blanco); text-align: center; padding: 40px 20px; }
-        .social-icons { margin-top: 15px; display: flex; justify-content: center; gap: 20px; }
-        .social-icons a { color: var(--blanco); font-size: 24px; transition: color 0.3s; }
-        .social-icons a:hover { color: var(--celeste); }
-		html {
-			scroll-behavior: smooth;
-		}
-    </style>
-</head>
-<body>
+        /* Botones de navegación (Flechas) */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(15, 58, 99, 0.6);
+            color: var(--blanco);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">
-				<img src="img/logo.jpg" alt="Alliance Argentina">
-			</div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-					<a href="#quienes-somos">Quiénes Somos</a>
-				</li>
-                <li class="nav-item mega-menu-item">
-					<a href="#">Seguros <i class="fa-solid fa-chevron-down" style="font-size: 12px;"></i></a>
-    
-						<div class="dropdown mega-menu">
-							<!-- Columna 1 -->
-							<div class="mega-columna">
-							<h4>Particulares</h4>
-							<ul>
-								<li><a href="automotor_seguros.html">Automotor</a></li>
-								<li><a href="#">Hogar</a></li>
-								<li><a href="#">Vida</a></li>
-							</ul>
-						</div>
+        .slider-btn:hover {
+            background-color: var(--celeste);
+        }
 
-						<!-- Columna 2 -->
-						<div class="mega-columna">
-							<h4>Comercio</h4>
-							<ul>
-								<li><a href="#">Incendio</a></li>
-								<li><a href="#">Robo y Hurto</a></li>
-								<li><a href="#">Responsabilidad Civil</a></li>
-							</ul>
-						</div>
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
 
-						<!-- Columna 3 -->
-						<div class="mega-columna">
-							<h4>Pymes</h4>
-							<ul>
-								<li><a href="#">ART</a></li>
-								<li><a href="#">Caución</a></li>
-								<li><a href="#">Flota de Autos</a></li>
-							</ul>
-						</div>
+        /* Indicadores (Puntos de navegación inferiores) */
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
 
-						<!-- Columna 4 -->
-						<div class="mega-columna">
-							<h4>Industrias</h4>
-						<ul>
-							<li><a href="#">Responsabilidad Civil</a></li>
-							<li><a href="#">Caución</a></li>
-							<li><a href="#">ART</a></li>
-							<li><a href="#">Incendio</a></li>
-						</ul>
-						</div>
-					</div>
-				</li>
-                <li class="nav-item">
-					<a href="contacto.html">Contactos</a>
-				</li>
-                <li class="nav-item">
-                    <a href="cotizar.html" class="btn-cotizar" style="color: var(--blanco);">Cotizar Ahora</a>
-                </li>
-            </ul>
-        </div>
-    </header>
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Tranquilidad para ti y tu familia</h1>
-                <p>Encuentra la cobertura perfecta con el respaldo que necesitas.</p>
-            </div>
-        </section>
-		<!-- SECCIÓN QUIÉNES SOMOS -->
-    <style>
+        .dot.active {
+            background-color: var(--celeste);
+        }
+
+        /* --- ESTILOS SECCIÓN EMPRESA --- */
         .seccion-empresa {
             padding: 60px 20px;
             background-color: var(--fondo-claro);
@@ -284,34 +273,262 @@
             font-size: 16px;
             line-height: 1.6;
         }
-    </style>
 
-    <section class="seccion-empresa" id="quienes-somos">
-        <h2>Alliance Argentina</h2>
-        <div class="trayectoria-badge">
-            20 años de experiencia junto a las 30 mejores aseguradoras
-        </div>
+        footer { background-color: var(--azul-oscuro); color: var(--blanco); text-align: center; padding: 40px 20px; }
+        .social-icons { margin-top: 15px; display: flex; justify-content: center; gap: 20px; }
+        .social-icons a { color: var(--blanco); font-size: 24px; transition: color 0.3s; }
+        .social-icons a:hover { color: var(--celeste); }
         
-        <div class="contenedor-tarjetas">
-            <!-- Tarjeta 1: Misión -->
-            <div class="tarjeta-empresa">
-                <h3>Nuestra Misión</h3>
-                <p>Satisfacer las necesidades de cobertura de riesgos asegurables a través de un servicio profesional eficiente, reafirmando nuestro compromiso con nuestros valores y con el entorno.</p>
-            </div>
+        html {
+            scroll-behavior: smooth;
+        }
+		/* --- ESTILOS DEL CARTEL FLOTANTE (MODAL) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 58, 99, 0.6); /* Fondo azul oscuro semitransparente */
+    backdrop-filter: blur(4px); /* Efecto desfoque moderno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
 
-            <!-- Tarjeta 2: Enfoque / Visión -->
-            <div class="tarjeta-empresa">
-                <h3>Innovación y Cercanía</h3>
-                <p>Brindamos los mejores seguros, a través de un vínculo equilibrado entre la tecnología y la relación personal con los clientes, con soluciones innovadoras, siempre manteniendo los valores.</p>
-            </div>
+.modal-overlay.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
 
-            <!-- Tarjeta 3: Compromiso -->
-            <div class="tarjeta-empresa">
-                <h3>Nuestro Compromiso</h3>
-                <p>Obtener los mejores costos y condiciones del mercado asegurador, visibilizando con eficiencia la continuidad del negocio de nuestro cliente ante un siniestro.</p>
+.modal-content {
+    background-color: var(--blanco);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    padding: 30px;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.4s ease;
+    border-top: 5px solid var(--celeste);
+    text-align: center;
+}
+
+.modal-overlay.mostrar .modal-content {
+    transform: translateY(0);
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-cerrar:hover {
+    color: var(--azul-oscuro);
+}
+
+.modal-header i {
+    font-size: 40px;
+    color: var(--celeste);
+    margin-bottom: 10px;
+}
+
+.modal-header h3 {
+    color: var(--azul-oscuro);
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.modal-body p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto-oscuro);
+    margin-bottom: 25px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-modal-accion {
+    background-color: var(--celeste);
+    color: var(--blanco);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-modal-accion:hover {
+    background-color: var(--azul-oscuro);
+}
+
+.btn-modal-secundario {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-modal-secundario:hover {
+    background-color: #ccc;
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="img/logo.jpg" alt="Alliance Argentina">
             </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#quienes-somos">Quiénes Somos</a>
+                </li>
+                <li class="nav-item mega-menu-item">
+                    <a href="#">Seguros <i class="fa-solid fa-chevron-down" style="font-size: 12px;"></i></a>
+                    <div class="dropdown mega-menu">
+                        <!-- Columna 1 -->
+                        <div class="mega-columna">
+                            <h4>Particulares</h4>
+                            <ul>
+                                <li><a href="automotor_seguros.html">Automotor</a></li>
+                                <li><a href="#">Hogar</a></li>
+                                <li><a href="#">Vida</a></li>
+                            </ul>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="mega-columna">
+                            <h4>Comercio</h4>
+                            <ul>
+                                <li><a href="#">Incendio</a></li>
+                                <li><a href="#">Robo y Hurto</a></li>
+                                <li><a href="#">Responsabilidad Civil</a></li>
+                            </ul>
+                        </div>
+                        <!-- Columna 3 -->
+                        <div class="mega-columna">
+                            <h4>Pymes</h4>
+                            <ul>
+                                <li><a href="#">ART</a></li>
+                                <li><a href="#">Caución</a></li>
+                                <li><a href="#">Flota de Autos</a></li>
+                            </ul>
+                        </div>
+                        <!-- Columna 4 -->
+                        <div class="mega-columna">
+                            <h4>Industrias</h4>
+                            <ul>
+                                <li><a href="#">Responsabilidad Civil</a></li>
+                                <li><a href="#">Caución</a></li>
+                                <li><a href="#">ART</a></li>
+                                <li><a href="#">Incendio</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="contacto.html">Contactos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cotizar.html" class="btn-cotizar" style="color: var(--blanco);">Cotizar Ahora</a>
+                </li>
+            </ul>
         </div>
-    </section>
+    </header>
+
+    <main>
+        <!-- SECCIÓN CARRUSEL / SLIDER PRINCIPAL -->
+        <section class="slider-container">
+            <!-- Diapositiva 1 -->
+            <div class="slide slide1 active">
+                <div class="hero-content">
+                    <h1>Tranquilidad para ti y tu familia</h1>
+                    <p>Encuentra la cobertura perfecta con el respaldo que necesitas.</p>
+                </div>
+            </div>
+
+            <!-- Diapositiva 2 -->
+            <div class="slide slide2">
+                <div class="hero-content">
+                    <h1>Protección Integral para tu Comercio y Pyme</h1>
+                    <p>Aseguramos la continuidad de tu negocio ante cualquier imprevisto.</p>
+                </div>
+            </div>
+
+            <!-- Diapositiva 3 -->
+            <div class="slide slide3">
+                <div class="hero-content">
+                    <h1>Manejá Seguro, Manejá Tranquilo</h1>
+                    <p>Las mejores coberturas de automotor al costo más conveniente.</p>
+                </div>
+            </div>
+
+            <!-- Flechas de Control -->
+            <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn" onclick="changeSlide(1)">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Puntos / Indicadores -->
+            <div class="slider-dots">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </section>
+
+        <!-- SECCIÓN QUIÉNES SOMOS -->
+        <section class="seccion-empresa" id="quienes-somos">
+            <h2>Alliance Argentina</h2>
+            <div class="trayectoria-badge">
+                20 años de experiencia junto a las 30 mejores aseguradoras
+            </div>
+            
+            <div class="contenedor-tarjetas">
+                <!-- Tarjeta 1: Misión -->
+                <div class="tarjeta-empresa">
+                    <h3>Nuestra Misión</h3>
+                    <p>Satisfacer las necesidades de cobertura de riesgos asegurables a través de un servicio profesional eficiente, reafirmando nuestro compromiso con nuestros valores y con el entorno.</p>
+                </div>
+
+                <!-- Tarjeta 2: Enfoque / Visión -->
+                <div class="tarjeta-empresa">
+                    <h3>Innovación y Cercanía</h3>
+                    <p>Brindamos los mejores seguros, a través de un vínculo equilibrado entre la tecnología y la relación personal con los clientes, con soluciones innovadoras, siempre manteniendo los valores.</p>
+                </div>
+
+                <!-- Tarjeta 3: Compromiso -->
+                <div class="tarjeta-empresa">
+                    <h3>Nuestro Compromiso</h3>
+                    <p>Obtener los mejores costos y condiciones del mercado asegurador, visibilizando con eficiencia la continuidad del negocio de nuestro cliente ante un siniestro.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -325,5 +542,113 @@
         <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">&copy; 2026 Alliance Argentina - Todos los derechos reservados.</p>
     </footer>
 
+    <!-- SCRIPT PARA EL FUNCIONAMIENTO DEL CARRUSEL -->
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const intervalTime = 5000; // Cambia de imagen cada 5 segundos (5000ms)
+        let slideInterval;
+
+        function showSlide(index) {
+            // Manejo de límites circular
+            if (index >= slides.length) slideIndex = 0;
+            else if (index < 0) slideIndex = slides.length - 1;
+            else slideIndex = index;
+
+            // Ocultar todas las imágenes y remover clase active
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Mostrar la imagen actual
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        // Cambiar por flechas
+        function changeSlide(direction) {
+            showSlide(slideIndex + direction);
+            resetTimer(); // Reinicia el temporizador automático al hacer clic manual
+        }
+
+        // Cambiar por puntos inferiores
+        function currentSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        // Temporizador para cambio automático
+        function startTimer() {
+            slideInterval = setInterval(() => {
+                showSlide(slideIndex + 1);
+            }, intervalTime);
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+        }
+
+        // Iniciar el carrusel al cargar la página
+        startTimer();
+    </script>
+<!-- CARTEL FLOTANTE MODERNO -->
+<div id="modal-promo" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-cerrar" onclick="cerrarModal()">&times;</button>
+        <div class="modal-header">
+            <i class="fa-solid fa-bullhorn"></i>
+            <h3>Novedades y Promociones</h3>
+        </div>
+        <div class="modal-body">
+            <p id="texto-promocion">Cargando aviso...</p>
+        </div>
+        <div class="modal-footer">
+            <a href="cotizar.html" class="btn-modal-accion">Aprovechar Ahora</a>
+            <button class="btn-modal-secundario" onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT PARA LEER EL ARCHIVO .TXT Y GESTIONAR EL MODAL -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Cargar el contenido del archivo TXT
+        fetch('promocion.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar el archivo');
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Si el archivo tiene texto válido, lo inserta y muestra el modal
+                if (data.trim() !== "") {
+                    document.getElementById('texto-promocion').innerText = data;
+                    
+                    // Pequeña pausa de 1 segundo antes de mostrarlo para que sea fluido
+                    setTimeout(() => {
+                        document.getElementById('modal-promo').classList.add('mostrar');
+                    }, 1000);
+                }
+            })
+            .catch(error => {
+                console.log('Error al cargar la promoción:', error);
+                // Si falla o el TXT está vacío, el modal permanece oculto.
+            });
+    });
+
+    function cerrarModal() {
+        document.getElementById('modal-promo').classList.remove('mostrar');
+    }
+
+    // Opcional: Cerrar al hacer clic fuera de la caja blanca
+    window.onclick = function(event) {
+        const modal = document.getElementById('modal-promo');
+        if (event.target === modal) {
+            cerrarModal();
+        }
+    }
+</script>
 </body>
 </html>
